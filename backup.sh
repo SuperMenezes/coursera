@@ -16,11 +16,11 @@ then
 fi
 
 # [TASK 1]
-targetDirectory= $1
-destinationDirectory= $2
+targetDirectory=$1
+destinationDirectory=$2
 
 # [TASK 2]
-echo "PATH#1 -> $targetDirectory"
+echo "PATH#1 ->" $targetDirectory
 echo "PATH#2 -> $destinationDirectory"
 
 # [TASK 3]
@@ -49,23 +49,24 @@ cd $targetDirectory # <-
 
 # [TASK 8]
 yesterdayTS=$(($currentTS + 24 * 60 * 60))
-
+#echo $yesterdayTS
 declare -a toBackup
 
-for file in * # [TASK 9]
+for file in *; # [TASK 9]
 do
   # [TASK 10]
-  if [[`date -r $file +%s` -gt $yesterdayTS]]
+  if [ `date -r $file +%s` -lt $yesterdayTS ];
   then
-    # [TASK 11]
+  #  # [TASK 11]
     toBackup+=($file)
-  fi
+    echo $file
+    fi
 done
 
 # [TASK 12]
-tar -czvf $backupFileName ${toBackup[@]}
+#tar -czvf $backupFileName ${toBackup[@]}
 
 # [TASK 13]
-mv $backupFileName $destDirAbsPath
+#mv $backupFileName $destDirAbsPath
 
-# Congratulations! You completed the final project for this course!
+echo "Congratulations! You completed the final project for this course!"
