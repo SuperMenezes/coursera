@@ -27,7 +27,7 @@ echo "PATH#2 -> $destinationDirectory"
 currentTS=`date +%s`
 
 # [TASK 4]
-backupFileName="backup-[$currentTS]"
+backupFileName="backup-[$currentTS].tar.gz"
 
 # We're going to:
   # 1: Go into the target directory
@@ -40,16 +40,16 @@ backupFileName="backup-[$currentTS]"
 origAbsPath=`pwd`
 
 # [TASK 6]
-cd $destinationDirectory # <-
+cd $destinationDirectory
 destDirAbsPath=`pwd`
 
 # [TASK 7]
-cd $origAbsPath # <-
-cd $targetDirectory # <-
+cd $origAbsPath 
+cd $targetDirectory 
 
 # [TASK 8]
 yesterdayTS=$(($currentTS + 24 * 60 * 60))
-#echo $yesterdayTS
+
 declare -a toBackup
 
 for file in *; # [TASK 9]
@@ -57,16 +57,15 @@ do
   # [TASK 10]
   if [ `date -r $file +%s` -lt $yesterdayTS ];
   then
-  #  # [TASK 11]
+  # [TASK 11]
     toBackup+=($file)
-    echo $file
-    fi
+  fi
 done
 
 # [TASK 12]
-#tar -czvf $backupFileName ${toBackup[@]}
+tar -czvf $backupFileName ${toBackup[@]}
 
 # [TASK 13]
-#mv $backupFileName $destDirAbsPath
+mv $backupFileName $destDirAbsPath
 
 echo "Congratulations! You completed the final project for this course!"
